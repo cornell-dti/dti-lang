@@ -1,0 +1,58 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "dtilang",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#constants"
+    },
+    {
+      "include": "#types"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.dtilang",
+          "match": "(:octocat:|:dti:|:portalparrot:)"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "match": "//(.*)"
+        },
+        {
+          "name": "comment.block",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "constants": {
+      "patterns": [
+        {
+          "name": "constant.numeric",
+          "match": "(:zero:|:one:|:two:|:three:|:four:|:five:|:six:|:seven:|:eight:|:nine:)+"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "support.type",
+          "match": ":1e10:"
+        }
+      ]
+    }
+  },
+  "scopeName": "text.dtilang"
+}

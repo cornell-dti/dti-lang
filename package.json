@@ -1,0 +1,60 @@
+{
+  "name": "dti-lang",
+  "displayName": "vscode-dti-lang",
+  "publisher": "dev-sam",
+  "version": "0.1.0",
+  "description": "DTI Programming Language",
+  "main": "./lib/extension.js",
+  "repository": "https://github.com/SamChou19815/dti-lang",
+  "author": "Developer Sam",
+  "license": "AGPL-3.0",
+  "private": false,
+  "scripts": {
+    "start": "node lib/index.js",
+    "tsc": "tsc",
+    "package": "vsce package",
+    "format": "prettier --write '**/*.ts'",
+    "format:check": "prettier --check '**/*.ts'",
+    "postinstall": "antlr4ts -o src/generated -visitor PL.g4 && tsc"
+  },
+  "dependencies": {
+    "antlr4ts": "^0.5.0-alpha.3",
+    "vscode-languageclient": "^6.1.1",
+    "vscode-languageserver": "^6.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.7",
+    "@types/vscode": "^1.42.0",
+    "antlr4ts-cli": "^0.5.0-alpha.3",
+    "prettier": "^1.19.1",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
+  },
+  "engines": {
+    "vscode": "^1.42.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:dtilang"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "dtilang",
+        "extensions": [
+          ".dti"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "dtilang",
+        "scopeName": "text.dtilang",
+        "path": "./syntax-dtilang.json"
+      }
+    ]
+  }
+}

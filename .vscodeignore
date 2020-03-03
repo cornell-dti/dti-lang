@@ -1,0 +1,9 @@
+.antlr/
+.vscode/
+.github/
+src/
+examples/
+# Only keep dependencies that are needed for vscode extension
+node_modules/
+!node_modules/vscode-languageclient
+!node_modules/vscode-languageserver

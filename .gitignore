@@ -1,0 +1,39 @@
+# IDE
+**/.idea/
+**/.settings
+*.project
+*.classpath
+*.iml
+
+# Build
+**/.gradle/
+**/dist/
+**/build/
+**/out/
+
+# Git Files
+*.log
+*.diff
+
+# misc
+**/.DS_Store
+
+# Frontend
+
+## dependencies
+**/node_modules
+**/.pnp
+**/.pnp.js
+
+## logs
+**/npm-debug.log*
+**/yarn-debug.log*
+**/yarn-error.log*
+
+## Output
+lib/
+dti-lang-*.vsix
+
+## ANTLR4
+.antlr
+src/generated/PL*
