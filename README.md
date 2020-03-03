@@ -1,5 +1,7 @@
 # dti-lang
 
+![CI Status](https://github.com/SamChou19815/dti-lang/workflows/CI/badge.svg)
+
 A variant of lambda calculus, `dti-lang` is a programming language that is composed of
 [Cornell DTI](https://cornelldti.org)'s slack workspace emojis.
 
