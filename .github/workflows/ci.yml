@@ -8,5 +8,9 @@ jobs:
       - uses: actions/checkout@master
       - name: Set up Node
         uses: actions/setup-node@v1
-      - name: Install, Compile, and Test
-        run: yarn
+      - name: Install and Compile
+        run: yarn install
+      - name: Check Format
+        run: yarn format:check
+      - name: Run Tests
+        run: yarn test

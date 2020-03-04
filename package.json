@@ -16,7 +16,7 @@
     "format": "prettier --write '**/*.ts'",
     "format:check": "prettier --check '**/*.ts'",
     "test": "jest",
-    "postinstall": "antlr4ts -o src/generated -visitor PL.g4 && tsc && jest"
+    "postinstall": "antlr4ts -o src/generated -visitor PL.g4 && tsc"
   },
   "dependencies": {
     "antlr4ts": "^0.5.0-alpha.3",
