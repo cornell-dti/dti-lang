@@ -14,5 +14,7 @@ jobs:
           path: ~/.cache/yarn
           key: yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
           restore-keys: yarn-
-      - name: Yarn Install
+      - name: Install and Compile
         run: yarn
+      - name: Test
+        run: yarn test
