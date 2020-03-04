@@ -8,13 +8,5 @@ jobs:
       - uses: actions/checkout@master
       - name: Set up Node
         uses: actions/setup-node@v1
-      - name: Use Yarn Cache
-        uses: actions/cache@v1
-        with:
-          path: ~/.cache/yarn
-          key: yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-          restore-keys: yarn-
-      - name: Install and Compile
+      - name: Install, Compile, and Test
         run: yarn
-      - name: Test
-        run: yarn test
