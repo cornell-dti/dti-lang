@@ -29,3 +29,42 @@ it('can parse simple programs', () => {
     value: 42
   });
 });
+
+it('can parse a simple lambda application', () => {
+  expect(parse(`(:octocat: (:devsam:: :1e10:) :dti: :devsam:) (:four::two:)`)).toEqual({
+    type: 'app',
+    range: {
+      start: { line: 0, column: 0 },
+      end: { line: 0, column: 59 }
+    },
+    expressionType: 'unknown',
+    lambda: {
+      type: 'lambda',
+      range: {
+        start: { line: 0, column: 1 },
+        end: { line: 0, column: 44 }
+      },
+      expressionType: 'unknown',
+      parameter: ':devsam:',
+      parameterType: 'int',
+      body: {
+        type: 'id',
+        range: {
+          start: { line: 0, column: 36 },
+          end: { line: 0, column: 44 }
+        },
+        expressionType: 'unknown',
+        name: ':devsam:'
+      }
+    },
+    argument: {
+      type: 'int',
+      range: {
+        start: { line: 0, column: 47 },
+        end: { line: 0, column: 58 }
+      },
+      expressionType: 'int',
+      value: 42
+    }
+  });
+});
