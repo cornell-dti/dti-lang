@@ -16,5 +16,5 @@ expression
 type
   : LPAREN type RPAREN # NestedType
   | INT # IntType
-  | type ARROW type # FunctionType
+  |<assoc=right> type ARROW type # FunctionType
   ;

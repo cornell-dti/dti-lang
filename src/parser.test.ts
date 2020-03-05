@@ -31,7 +31,7 @@ it('can parse simple programs', () => {
 });
 
 it('can parse a simple lambda application', () => {
-  expect(parse(`(:octocat: (:devsam:: :1e10:) :dti: :devsam:) (:four::two:)`)).toEqual({
+  expect(parse('(:octocat: (:devsam:: :1e10:) :dti: :devsam:) (:four::two:)')).toEqual({
     type: 'app',
     range: {
       start: { line: 0, column: 0 },
@@ -65,6 +65,50 @@ it('can parse a simple lambda application', () => {
       },
       expressionType: 'int',
       value: 42
+    }
+  });
+});
+
+it('Can parse function type', () => {
+  expect(parse(':octocat: (:devsam:: :1e10::dti::1e10:) :dti: :devsam:')).toEqual({
+    type: 'lambda',
+    range: {
+      start: { line: 0, column: 0 },
+      end: { line: 0, column: 54 }
+    },
+    expressionType: 'unknown',
+    parameter: ':devsam:',
+    parameterType: { argumentType: 'int', returnType: 'int' },
+    body: {
+      type: 'id',
+      range: {
+        start: { line: 0, column: 46 },
+        end: { line: 0, column: 54 }
+      },
+      expressionType: 'unknown',
+      name: ':devsam:'
+    }
+  });
+});
+
+it('Can parse nested function type', () => {
+  expect(parse(':octocat: (:devsam:: :1e10::dti::1e10::dti::1e10:) :dti: :devsam:')).toEqual({
+    type: 'lambda',
+    range: {
+      start: { line: 0, column: 0 },
+      end: { line: 0, column: 65 }
+    },
+    expressionType: 'unknown',
+    parameter: ':devsam:',
+    parameterType: { argumentType: 'int', returnType: { argumentType: 'int', returnType: 'int' } },
+    body: {
+      type: 'id',
+      range: {
+        start: { line: 0, column: 57 },
+        end: { line: 0, column: 65 }
+      },
+      expressionType: 'unknown',
+      name: ':devsam:'
     }
   });
 });
