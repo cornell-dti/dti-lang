@@ -5,5 +5,6 @@ module.exports = {
   clearMocks: true,
   coverageDirectory: 'coverage',
   testPathIgnorePatterns: ['/node_modules/', '/lib/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/lib/', 'src/generated'],
   testEnvironment: 'node'
 };
