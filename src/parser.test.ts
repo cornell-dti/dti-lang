@@ -1,4 +1,5 @@
 import parse, { parseDTILangNumber } from './parser';
+import { DTILangNode } from './ast';
 
 it('can parse single-emoji numbers.', () => {
   expect(parseDTILangNumber(':zero:')).toBe(0);
@@ -21,94 +22,108 @@ it('can parse two-emoji-numbers', () => {
   expect(parseDTILangNumber(':four::two::four:')).toBe(424);
 });
 
+export const fortyTwoProgram: DTILangNode = {
+  type: 'int',
+  range: { start: { line: 0, column: 0 }, end: { line: 0, column: 11 } },
+  expressionType: 'int',
+  value: 42
+};
+
 it('can parse simple programs', () => {
-  expect(parse(':four::two:')).toEqual({
-    type: 'int',
-    range: { start: { line: 0, column: 0 }, end: { line: 0, column: 11 } },
-    expressionType: 'int',
-    value: 42
-  });
+  expect(parse(':four::two:')).toEqual(fortyTwoProgram);
 });
 
-it('can parse a simple lambda application', () => {
-  expect(parse('(:octocat: (:devsam:: :1e10:) :dti: :devsam:) (:four::two:)')).toEqual({
-    type: 'app',
+export const applyIdentityFunctionProgram: DTILangNode = {
+  type: 'app',
+  range: {
+    start: { line: 0, column: 0 },
+    end: { line: 0, column: 59 }
+  },
+  expressionType: 'unknown',
+  lambda: {
+    type: 'lambda',
     range: {
-      start: { line: 0, column: 0 },
-      end: { line: 0, column: 59 }
+      start: { line: 0, column: 1 },
+      end: { line: 0, column: 44 }
     },
     expressionType: 'unknown',
-    lambda: {
-      type: 'lambda',
+    parameter: ':devsam:',
+    parameterType: 'int',
+    body: {
+      type: 'id',
       range: {
-        start: { line: 0, column: 1 },
+        start: { line: 0, column: 36 },
         end: { line: 0, column: 44 }
       },
       expressionType: 'unknown',
-      parameter: ':devsam:',
-      parameterType: 'int',
-      body: {
-        type: 'id',
-        range: {
-          start: { line: 0, column: 36 },
-          end: { line: 0, column: 44 }
-        },
-        expressionType: 'unknown',
-        name: ':devsam:'
-      }
-    },
-    argument: {
-      type: 'int',
-      range: {
-        start: { line: 0, column: 47 },
-        end: { line: 0, column: 58 }
-      },
-      expressionType: 'int',
-      value: 42
+      name: ':devsam:'
     }
-  });
+  },
+  argument: {
+    type: 'int',
+    range: {
+      start: { line: 0, column: 47 },
+      end: { line: 0, column: 58 }
+    },
+    expressionType: 'int',
+    value: 42
+  }
+};
+
+it('can parse a simple lambda application', () => {
+  expect(parse('(:octocat: (:devsam:: :1e10:) :dti: :devsam:) (:four::two:)')).toEqual(
+    applyIdentityFunctionProgram
+  );
 });
 
-it('Can parse function type', () => {
-  expect(parse(':octocat: (:devsam:: :1e10::dti::1e10:) :dti: :devsam:')).toEqual({
-    type: 'lambda',
+export const identityLambdaWithFunctionTypeProgram: DTILangNode = {
+  type: 'lambda',
+  range: {
+    start: { line: 0, column: 0 },
+    end: { line: 0, column: 54 }
+  },
+  expressionType: 'unknown',
+  parameter: ':devsam:',
+  parameterType: { argumentType: 'int', returnType: 'int' },
+  body: {
+    type: 'id',
     range: {
-      start: { line: 0, column: 0 },
+      start: { line: 0, column: 46 },
       end: { line: 0, column: 54 }
     },
     expressionType: 'unknown',
-    parameter: ':devsam:',
-    parameterType: { argumentType: 'int', returnType: 'int' },
-    body: {
-      type: 'id',
-      range: {
-        start: { line: 0, column: 46 },
-        end: { line: 0, column: 54 }
-      },
-      expressionType: 'unknown',
-      name: ':devsam:'
-    }
-  });
+    name: ':devsam:'
+  }
+};
+
+it('Can parse function type', () => {
+  expect(parse(':octocat: (:devsam:: :1e10::dti::1e10:) :dti: :devsam:')).toEqual(
+    identityLambdaWithFunctionTypeProgram
+  );
 });
 
-it('Can parse nested function type', () => {
-  expect(parse(':octocat: (:devsam:: :1e10::dti::1e10::dti::1e10:) :dti: :devsam:')).toEqual({
-    type: 'lambda',
+export const identityLambdaWithNestedFunctionTypeProgram: DTILangNode = {
+  type: 'lambda',
+  range: {
+    start: { line: 0, column: 0 },
+    end: { line: 0, column: 65 }
+  },
+  expressionType: 'unknown',
+  parameter: ':devsam:',
+  parameterType: { argumentType: 'int', returnType: { argumentType: 'int', returnType: 'int' } },
+  body: {
+    type: 'id',
     range: {
-      start: { line: 0, column: 0 },
+      start: { line: 0, column: 57 },
       end: { line: 0, column: 65 }
     },
     expressionType: 'unknown',
-    parameter: ':devsam:',
-    parameterType: { argumentType: 'int', returnType: { argumentType: 'int', returnType: 'int' } },
-    body: {
-      type: 'id',
-      range: {
-        start: { line: 0, column: 57 },
-        end: { line: 0, column: 65 }
-      },
-      expressionType: 'unknown',
-      name: ':devsam:'
-    }
-  });
+    name: ':devsam:'
+  }
+};
+
+it('Can parse nested function type', () => {
+  expect(parse(':octocat: (:devsam:: :1e10::dti::1e10::dti::1e10:) :dti: :devsam:')).toEqual(
+    identityLambdaWithNestedFunctionTypeProgram
+  );
 });
