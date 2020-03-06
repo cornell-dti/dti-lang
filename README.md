@@ -33,6 +33,14 @@ The program **is** an expression. The language has five possible expressions:
 - [x] Fun
 - [ ] ~~Readability~~
 
+## Examples
+
+- 42: `:four::two:` ![42](./images/42.png)
+- identity function: `:octocat: (:devsam:: :1e10:) :dti: :devsam:`  ![id](./images/id.png)
+- identity function applied to get 84:
+  `(:octocat: (:devsam:: :1e10:) :dti: :devsam:) (:four::two: :portalparrot: :four::two:)`
+  ![id-84](./images/id-84.png)
+
 ## Development
 
 Run `yarn` to install all dependencies and compile the project.
