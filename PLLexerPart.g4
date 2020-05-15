@@ -21,6 +21,8 @@ fragment Letter
   | ':pikachu-laura:'
   | ':emily-bakes:'
   | ':megan-disapproves:'
+  | ':jagger-thinking:'
+  | ':cedric-thinking:'
   ;
 DecimalLiteral : ZeroDigit | NonZeroDigit (Digit)*;
 fragment Digit : NonZeroDigit | ZeroDigit;
