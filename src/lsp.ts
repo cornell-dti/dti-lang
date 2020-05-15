@@ -67,6 +67,14 @@ const start = (): void => {
       kind: CompletionItemKind.Text,
     },
     {
+      insertText: 'jagger-thinking:',
+      kind: CompletionItemKind.Text,
+    },
+    {
+      insertText: 'cedric-thinking:',
+      kind: CompletionItemKind.Text,
+    },
+    {
       insertText: 'zero:',
       kind: CompletionItemKind.Constant,
     },
