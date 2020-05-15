@@ -4,7 +4,7 @@ import {
   fortyTwoProgram,
   applyIdentityFunctionProgram,
   identityLambdaWithFunctionTypeProgram,
-  identityLambdaWithNestedFunctionTypeProgram
+  identityLambdaWithNestedFunctionTypeProgram,
 } from './parser.test';
 
 it('good programs can type check.', () => {
@@ -12,17 +12,17 @@ it('good programs can type check.', () => {
   expect(typeCheck(applyIdentityFunctionProgram).expressionType).toEqual('int');
   expect(typeCheck(identityLambdaWithFunctionTypeProgram).expressionType).toEqual({
     argumentType: { argumentType: 'int', returnType: 'int' },
-    returnType: { argumentType: 'int', returnType: 'int' }
+    returnType: { argumentType: 'int', returnType: 'int' },
   });
   expect(typeCheck(identityLambdaWithNestedFunctionTypeProgram).expressionType).toEqual({
     argumentType: {
       argumentType: 'int',
-      returnType: { argumentType: 'int', returnType: 'int' }
+      returnType: { argumentType: 'int', returnType: 'int' },
     },
     returnType: {
       argumentType: 'int',
-      returnType: { argumentType: 'int', returnType: 'int' }
-    }
+      returnType: { argumentType: 'int', returnType: 'int' },
+    },
   });
 });
 

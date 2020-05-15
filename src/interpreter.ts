@@ -43,7 +43,7 @@ const interpret = (node: DTILangNode, context: Context = {}): Value => {
       }
       const newContext = {
         ...context,
-        [lambda.parameter]: interpret(node.argument, context)
+        [lambda.parameter]: interpret(node.argument, context),
       };
       return interpret(lambda.body, newContext);
     }

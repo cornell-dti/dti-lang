@@ -9,11 +9,11 @@ export function activate(context: vscode.ExtensionContext) {
     debug: {
       module: serverModule,
       transport: TransportKind.ipc,
-      options: { execArgv: ['--nolazy', '--inspect=6009'] }
-    }
+      options: { execArgv: ['--nolazy', '--inspect=6009'] },
+    },
   };
   const clientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: 'file', language: 'dtilang' }]
+    documentSelector: [{ scheme: 'file', language: 'dtilang' }],
   };
 
   const languageClient = new LanguageClient(

@@ -26,7 +26,7 @@ export const fortyTwoProgram: DTILangNode = {
   type: 'int',
   range: { start: { line: 0, column: 0 }, end: { line: 0, column: 11 } },
   expressionType: 'int',
-  value: 42
+  value: 42,
 };
 
 it('can parse simple programs', () => {
@@ -37,14 +37,14 @@ export const applyIdentityFunctionProgram: DTILangNode = {
   type: 'app',
   range: {
     start: { line: 0, column: 0 },
-    end: { line: 0, column: 59 }
+    end: { line: 0, column: 59 },
   },
   expressionType: 'unknown',
   lambda: {
     type: 'lambda',
     range: {
       start: { line: 0, column: 1 },
-      end: { line: 0, column: 44 }
+      end: { line: 0, column: 44 },
     },
     expressionType: 'unknown',
     parameter: ':devsam:',
@@ -53,21 +53,21 @@ export const applyIdentityFunctionProgram: DTILangNode = {
       type: 'id',
       range: {
         start: { line: 0, column: 36 },
-        end: { line: 0, column: 44 }
+        end: { line: 0, column: 44 },
       },
       expressionType: 'unknown',
-      name: ':devsam:'
-    }
+      name: ':devsam:',
+    },
   },
   argument: {
     type: 'int',
     range: {
       start: { line: 0, column: 47 },
-      end: { line: 0, column: 58 }
+      end: { line: 0, column: 58 },
     },
     expressionType: 'int',
-    value: 42
-  }
+    value: 42,
+  },
 };
 
 it('can parse a simple lambda application', () => {
@@ -80,7 +80,7 @@ export const identityLambdaWithFunctionTypeProgram: DTILangNode = {
   type: 'lambda',
   range: {
     start: { line: 0, column: 0 },
-    end: { line: 0, column: 54 }
+    end: { line: 0, column: 54 },
   },
   expressionType: 'unknown',
   parameter: ':devsam:',
@@ -89,11 +89,11 @@ export const identityLambdaWithFunctionTypeProgram: DTILangNode = {
     type: 'id',
     range: {
       start: { line: 0, column: 46 },
-      end: { line: 0, column: 54 }
+      end: { line: 0, column: 54 },
     },
     expressionType: 'unknown',
-    name: ':devsam:'
-  }
+    name: ':devsam:',
+  },
 };
 
 it('Can parse function type', () => {
@@ -106,7 +106,7 @@ export const identityLambdaWithNestedFunctionTypeProgram: DTILangNode = {
   type: 'lambda',
   range: {
     start: { line: 0, column: 0 },
-    end: { line: 0, column: 65 }
+    end: { line: 0, column: 65 },
   },
   expressionType: 'unknown',
   parameter: ':devsam:',
@@ -115,11 +115,11 @@ export const identityLambdaWithNestedFunctionTypeProgram: DTILangNode = {
     type: 'id',
     range: {
       start: { line: 0, column: 57 },
-      end: { line: 0, column: 65 }
+      end: { line: 0, column: 65 },
     },
     expressionType: 'unknown',
-    name: ':devsam:'
-  }
+    name: ':devsam:',
+  },
 };
 
 it('Can parse nested function type', () => {

@@ -5,7 +5,7 @@ import {
   CompletionItemKind,
   TextDocumentPositionParams,
   InitializeResult,
-  TextDocumentSyncKind
+  TextDocumentSyncKind,
 } from 'vscode-languageserver';
 
 const start = (): void => {
@@ -19,94 +19,94 @@ const start = (): void => {
         textDocumentSync: TextDocumentSyncKind.Full,
         completionProvider: {
           triggerCharacters: [':'],
-          resolveProvider: false
-        }
-      }
+          resolveProvider: false,
+        },
+      },
     })
   );
 
   const completionItems = [
     {
       insertText: 'octocat:',
-      kind: CompletionItemKind.Keyword
+      kind: CompletionItemKind.Keyword,
     },
     {
       insertText: 'dti:',
-      kind: CompletionItemKind.Keyword
+      kind: CompletionItemKind.Keyword,
     },
     {
       insertText: 'portalparrot:',
-      kind: CompletionItemKind.Keyword
+      kind: CompletionItemKind.Keyword,
     },
     {
       insertText: '1e10:',
-      kind: CompletionItemKind.Class
+      kind: CompletionItemKind.Class,
     },
     {
       insertText: 'evan-ooos:',
-      kind: CompletionItemKind.Text
+      kind: CompletionItemKind.Text,
     },
     {
       insertText: 'neha-dies-inside:',
-      kind: CompletionItemKind.Text
+      kind: CompletionItemKind.Text,
     },
     {
       insertText: 'devsam:',
-      kind: CompletionItemKind.Text
+      kind: CompletionItemKind.Text,
     },
     {
       insertText: 'pikachu-laura:',
-      kind: CompletionItemKind.Text
+      kind: CompletionItemKind.Text,
     },
     {
       insertText: 'emily-bakes:',
-      kind: CompletionItemKind.Text
+      kind: CompletionItemKind.Text,
     },
     {
       insertText: 'megan-disapproves:',
-      kind: CompletionItemKind.Text
+      kind: CompletionItemKind.Text,
     },
     {
       insertText: 'zero:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'one:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'two:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'three:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'four:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'five:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'six:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'seven:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'eight:',
-      kind: CompletionItemKind.Constant
+      kind: CompletionItemKind.Constant,
     },
     {
       insertText: 'nine:',
-      kind: CompletionItemKind.Constant
-    }
-  ].map(item => ({ ...item, label: `:${item.insertText}` }));
+      kind: CompletionItemKind.Constant,
+    },
+  ].map((item) => ({ ...item, label: `:${item.insertText}` }));
 
   // This handler provides the initial list of the completion items.
   connection.onCompletion((): CompletionItem[] => completionItems);

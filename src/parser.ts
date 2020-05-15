@@ -9,7 +9,7 @@ import {
   NumberLiteralExpressionContext,
   PlusExpressionContext,
   LambdaExpressionContext,
-  FunctionApplicationExpressionContext
+  FunctionApplicationExpressionContext,
 } from './generated/PLParser';
 import { PLVisitor } from './generated/PLVisitor';
 import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor';
@@ -25,7 +25,7 @@ const numberMapper: { readonly [k: string]: string } = {
   ':six:': '6',
   ':seven:': '7',
   ':eight:': '8',
-  ':nine:': '9'
+  ':nine:': '9',
 };
 
 // Visible for testing.
@@ -39,29 +39,29 @@ export const parseDTILangNumber = (text: string): number => {
   }
   const first = numberMapper[parts[0] + ':'];
   const last = numberMapper[':' + parts[parts.length - 1]];
-  const middleParts = parts.slice(1, parts.length - 1).map(part => numberMapper[`:${part}:`]);
+  const middleParts = parts.slice(1, parts.length - 1).map((part) => numberMapper[`:${part}:`]);
   const all = [first, ...middleParts, last].join('');
   return parseInt(all, 10);
 };
 
 const getStartPosition = (token: Token): Position => ({
   line: token.line - 1,
-  column: token.charPositionInLine
+  column: token.charPositionInLine,
 });
 
 const getEndPosition = (token: Token): Position => ({
   line: token.line - 1,
-  column: token.charPositionInLine + (token.text?.length ?? 0)
+  column: token.charPositionInLine + (token.text?.length ?? 0),
 });
 
 const getRangeOfToken = (token: Token): Range => ({
   start: getStartPosition(token),
-  end: getEndPosition(token)
+  end: getEndPosition(token),
 });
 
 const getRangeOfContext = (context: ParserRuleContext): Range => ({
   start: getStartPosition(context.start),
-  end: getEndPosition(context.stop ?? context.start)
+  end: getEndPosition(context.stop ?? context.start),
 });
 
 const throwParserError = (): never => {
@@ -95,14 +95,14 @@ class ExpressionVisitor extends AbstractParseTreeVisitor<DTILangNode>
     type: 'id',
     range: getRangeOfToken(ctx.Identifier().symbol),
     expressionType: 'unknown',
-    name: ctx.Identifier().text
+    name: ctx.Identifier().text,
   });
 
   visitNumberLiteralExpression = (ctx: NumberLiteralExpressionContext): DTILangNode => ({
     type: 'int',
     range: getRangeOfToken(ctx.DecimalLiteral().symbol),
     expressionType: 'int',
-    value: parseDTILangNumber(ctx.DecimalLiteral().text)
+    value: parseDTILangNumber(ctx.DecimalLiteral().text),
   });
 
   visitPlusExpression = (ctx: PlusExpressionContext): DTILangNode => {
@@ -112,7 +112,7 @@ class ExpressionVisitor extends AbstractParseTreeVisitor<DTILangNode>
       range: getRangeOfContext(ctx),
       expressionType: 'int',
       e1: children[0].accept(this),
-      e2: children[1].accept(this)
+      e2: children[1].accept(this),
     };
   };
 
@@ -122,7 +122,7 @@ class ExpressionVisitor extends AbstractParseTreeVisitor<DTILangNode>
     expressionType: 'unknown',
     parameter: ctx.Identifier().text,
     parameterType: ctx.type().accept(typeVisitor),
-    body: ctx.expression().accept(this)
+    body: ctx.expression().accept(this),
   });
 
   visitFunctionApplicationExpression = (ctx: FunctionApplicationExpressionContext): DTILangNode => {
@@ -132,7 +132,7 @@ class ExpressionVisitor extends AbstractParseTreeVisitor<DTILangNode>
       range: getRangeOfContext(ctx),
       expressionType: 'unknown',
       lambda: children[0].accept(this),
-      argument: children[1].accept(this)
+      argument: children[1].accept(this),
     };
   };
 }
@@ -142,10 +142,7 @@ const expressionVisitor = new ExpressionVisitor();
 const parse = (programString: string): DTILangNode => {
   const lexer = new PLLexer(new ANTLRInputStream(programString));
   const parser = new PLParser(new CommonTokenStream(lexer));
-  return parser
-    .topLevel()
-    .expression()
-    .accept(expressionVisitor);
+  return parser.topLevel().expression().accept(expressionVisitor);
 };
 
 export default parse;
