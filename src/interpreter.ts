@@ -34,6 +34,18 @@ const interpret = (node: DTILangNode, context: Context = {}): Value => {
       const value = v1.value + v2.value;
       return { type: 'int', value };
     }
+    case 'multiply': {
+      const v1 = interpret(node.e1, context);
+      if (v1.type !== 'int') {
+        throw new Error('Expect v1 to be int, got lambda.');
+      }
+      const v2 = interpret(node.e2, context);
+      if (v2.type !== 'int') {
+        throw new Error('Expect v2 to be int, got lambda.');
+      }
+      const value = v1.value * v2.value;
+      return { type: 'int', value };
+    }
     case 'lambda':
       return { type: 'closure', context, parameter: node.parameter, body: node.body };
     case 'app': {

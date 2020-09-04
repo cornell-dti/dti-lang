@@ -11,6 +11,7 @@ LPAREN : '(';
 RPAREN : ')';
 COLON : ':';
 PLUS : ':portalparrot:';
+MUL : ':devmegan:';
 ARROW : ':dti:';
 
 Identifier : Letter (Letter | Digit)*;

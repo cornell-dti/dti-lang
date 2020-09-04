@@ -30,7 +30,8 @@ const typeCheck = (node: DTILangNode, context: Context = {}): DTILangNode => {
       }
       return { ...node, expressionType };
     }
-    case 'add': {
+    case 'add':
+    case 'multiply': {
       const e1 = typeCheck(node.e1, context);
       if (e1.expressionType !== 'int') {
         throw new Error(`TypeError: Expect e1 to be int, got ${typeToString(e1.expressionType)}.`);
