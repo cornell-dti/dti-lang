@@ -8,6 +8,7 @@ import {
   IdentifierExpressionContext,
   NumberLiteralExpressionContext,
   PlusExpressionContext,
+  MulExpressionContext,
   LambdaExpressionContext,
   FunctionApplicationExpressionContext,
 } from './generated/PLParser';
@@ -109,6 +110,17 @@ class ExpressionVisitor extends AbstractParseTreeVisitor<DTILangNode>
     const children = ctx.expression();
     return {
       type: 'add',
+      range: getRangeOfContext(ctx),
+      expressionType: 'int',
+      e1: children[0].accept(this),
+      e2: children[1].accept(this),
+    };
+  };
+
+  visitMulExpression = (ctx: MulExpressionContext): DTILangNode => {
+    const children = ctx.expression();
+    return {
+      type: 'multiply',
       range: getRangeOfContext(ctx),
       expressionType: 'int',
       e1: children[0].accept(this),
