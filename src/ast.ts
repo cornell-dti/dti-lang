@@ -28,7 +28,7 @@ interface AddNode extends BaseNode {
   readonly e2: DTILangNode;
 }
 
-interface MuliplyNode extends BaseNode {
+interface MultiplyNode extends BaseNode {
   readonly type: 'multiply';
   readonly e1: DTILangNode;
   readonly e2: DTILangNode;
@@ -51,6 +51,6 @@ export type DTILangNode =
   | IdentifierNode
   | IntLiteralNode
   | AddNode
-  | MuliplyNode
+  | MultiplyNode
   | LambdaNode
   | FunctionApplicationNode;

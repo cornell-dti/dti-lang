@@ -55,6 +55,10 @@ const start = (): void => {
       kind: CompletionItemKind.Text,
     },
     {
+      insertText: 'devmegan:',
+      kind: CompletionItemKind.Text,
+    },
+    {
       insertText: 'pikachu-laura:',
       kind: CompletionItemKind.Text,
     },
